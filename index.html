@@ -72,7 +72,7 @@ function size_y(size) {
 
 function createMesh(skipScene) {
     if (!skipScene) {
-        if (guidata.scene == "portal1") {
+        if (guidata.scene == "portal1" || guidata.scene == "move1" || guidata.scene == "move2" || guidata.scene == "move3" || guidata.scene == "move4") {
             guidata.ratio = 1.;
             guidata.size = 50;
             constants.iterations = 3;
@@ -279,6 +279,10 @@ function getSceneTypeValue() {
         case "torus": return 2;
         case "flat": return 3;
         case "portal2": return 4;
+        case "move1": return 4;
+        case "move2": return 6;
+        case "move3": return 7;
+        case "move4": return 8;
         default: return 0;
     }
 }
@@ -336,6 +340,10 @@ function setupGUI() {
         "cylinder",
         "torus",
         "flat",
+        "move1",
+        "move2",
+        "move3",
+        "move4",
     ]).onChange(value => {
         createMesh(false);
     });
