@@ -312,6 +312,199 @@ impl SpaceGraph {
     fn get_index(&self, i: usize, j: usize) -> usize {
         i * self.sizey + j
     }
+    
+    fn make_move_1_scene(&mut self) {
+        let blue_x = (self.sizex as f32 * 0.2) as usize;
+        let orange_x = (self.sizex as f32 * 0.8) as usize; // Moved forward (closer to blue_x)
+        let start_y = (self.sizey as f32 * 0.4) as usize;
+        let end_y = (self.sizey as f32 * 0.6) as usize;
+    
+        let sizey = self.sizey;
+        let get_index = |i, j| i * sizey + j;
+    
+        // -------------------------------------------------------------------
+    
+        // Disconnect singularity points from up and down
+    
+        self.graph[get_index(blue_x, start_y)].down = None;
+        self.graph[get_index(blue_x, start_y - 1)].up = None;
+    
+        self.graph[get_index(blue_x, end_y)].up = None;
+        self.graph[get_index(blue_x, end_y + 1)].down = None;
+    
+        self.graph[get_index(orange_x, start_y)].down = None;
+        self.graph[get_index(orange_x, start_y - 1)].up = None;
+    
+        self.graph[get_index(orange_x, end_y)].up = None;
+        self.graph[get_index(orange_x, end_y + 1)].down = None;
+    
+        // -------------------------------------------------------------------
+    
+        // Connect the main vertical surface
+    
+        for j in start_y..=end_y {
+            let m1 = get_index(blue_x, j);
+            let r1 = get_index(blue_x + 1, j);
+            let m2 = get_index(orange_x, j);
+            let r2 = get_index(orange_x + 1, j);
+    
+            self.graph[m1].right = Some(r2);
+            self.graph[r2].left = Some(m1);
+    
+            self.graph[m2].right = Some(r1);
+            self.graph[r1].left = Some(m2);
+    
+            let new_uv = self.graph[m2].uv.clone();
+            self.graph[m1].uv.extend(new_uv);
+    
+            let new_uv = self.graph[m1].uv.clone();
+            self.graph[m2].uv.extend(new_uv);
+        }
+    }
+    fn make_move_2_scene(&mut self) {
+        let blue_x = (self.sizex as f32 * 0.2) as usize;
+        let orange_x = (self.sizex as f32 * 0.7) as usize; // Moved forward (closer to blue_x)
+        let start_y = (self.sizey as f32 * 0.4) as usize;
+        let end_y = (self.sizey as f32 * 0.6) as usize;
+    
+        let sizey = self.sizey;
+        let get_index = |i, j| i * sizey + j;
+    
+        // -------------------------------------------------------------------
+    
+        // Disconnect singularity points from up and down
+    
+        self.graph[get_index(blue_x, start_y)].down = None;
+        self.graph[get_index(blue_x, start_y - 1)].up = None;
+    
+        self.graph[get_index(blue_x, end_y)].up = None;
+        self.graph[get_index(blue_x, end_y + 1)].down = None;
+    
+        self.graph[get_index(orange_x, start_y)].down = None;
+        self.graph[get_index(orange_x, start_y - 1)].up = None;
+    
+        self.graph[get_index(orange_x, end_y)].up = None;
+        self.graph[get_index(orange_x, end_y + 1)].down = None;
+    
+        // -------------------------------------------------------------------
+    
+        // Connect the main vertical surface
+    
+        for j in start_y..=end_y {
+            let m1 = get_index(blue_x, j);
+            let r1 = get_index(blue_x + 1, j);
+            let m2 = get_index(orange_x, j);
+            let r2 = get_index(orange_x + 1, j);
+    
+            self.graph[m1].right = Some(r2);
+            self.graph[r2].left = Some(m1);
+    
+            self.graph[m2].right = Some(r1);
+            self.graph[r1].left = Some(m2);
+    
+            let new_uv = self.graph[m2].uv.clone();
+            self.graph[m1].uv.extend(new_uv);
+    
+            let new_uv = self.graph[m1].uv.clone();
+            self.graph[m2].uv.extend(new_uv);
+        }
+    }
+    fn make_move_3_scene(&mut self) {
+        let blue_x = (self.sizex as f32 * 0.2) as usize;
+        let orange_x = (self.sizex as f32 * 0.6) as usize; // Moved forward (closer to blue_x)
+        let start_y = (self.sizey as f32 * 0.4) as usize;
+        let end_y = (self.sizey as f32 * 0.6) as usize;
+    
+        let sizey = self.sizey;
+        let get_index = |i, j| i * sizey + j;
+    
+        // -------------------------------------------------------------------
+    
+        // Disconnect singularity points from up and down
+    
+        self.graph[get_index(blue_x, start_y)].down = None;
+        self.graph[get_index(blue_x, start_y - 1)].up = None;
+    
+        self.graph[get_index(blue_x, end_y)].up = None;
+        self.graph[get_index(blue_x, end_y + 1)].down = None;
+    
+        self.graph[get_index(orange_x, start_y)].down = None;
+        self.graph[get_index(orange_x, start_y - 1)].up = None;
+    
+        self.graph[get_index(orange_x, end_y)].up = None;
+        self.graph[get_index(orange_x, end_y + 1)].down = None;
+    
+        // -------------------------------------------------------------------
+    
+        // Connect the main vertical surface
+    
+        for j in start_y..=end_y {
+            let m1 = get_index(blue_x, j);
+            let r1 = get_index(blue_x + 1, j);
+            let m2 = get_index(orange_x, j);
+            let r2 = get_index(orange_x + 1, j);
+    
+            self.graph[m1].right = Some(r2);
+            self.graph[r2].left = Some(m1);
+    
+            self.graph[m2].right = Some(r1);
+            self.graph[r1].left = Some(m2);
+    
+            let new_uv = self.graph[m2].uv.clone();
+            self.graph[m1].uv.extend(new_uv);
+    
+            let new_uv = self.graph[m1].uv.clone();
+            self.graph[m2].uv.extend(new_uv);
+        }
+    }
+    fn make_move_4_scene(&mut self) {
+        let blue_x = (self.sizex as f32 * 0.2) as usize;
+        let orange_x = (self.sizex as f32 * 0.5) as usize; // Moved forward (closer to blue_x)
+        let start_y = (self.sizey as f32 * 0.4) as usize;
+        let end_y = (self.sizey as f32 * 0.6) as usize;
+    
+        let sizey = self.sizey;
+        let get_index = |i, j| i * sizey + j;
+    
+        // -------------------------------------------------------------------
+    
+        // Disconnect singularity points from up and down
+    
+        self.graph[get_index(blue_x, start_y)].down = None;
+        self.graph[get_index(blue_x, start_y - 1)].up = None;
+    
+        self.graph[get_index(blue_x, end_y)].up = None;
+        self.graph[get_index(blue_x, end_y + 1)].down = None;
+    
+        self.graph[get_index(orange_x, start_y)].down = None;
+        self.graph[get_index(orange_x, start_y - 1)].up = None;
+    
+        self.graph[get_index(orange_x, end_y)].up = None;
+        self.graph[get_index(orange_x, end_y + 1)].down = None;
+    
+        // -------------------------------------------------------------------
+    
+        // Connect the main vertical surface
+    
+        for j in start_y..=end_y {
+            let m1 = get_index(blue_x, j);
+            let r1 = get_index(blue_x + 1, j);
+            let m2 = get_index(orange_x, j);
+            let r2 = get_index(orange_x + 1, j);
+    
+            self.graph[m1].right = Some(r2);
+            self.graph[r2].left = Some(m1);
+    
+            self.graph[m2].right = Some(r1);
+            self.graph[r1].left = Some(m2);
+    
+            let new_uv = self.graph[m2].uv.clone();
+            self.graph[m1].uv.extend(new_uv);
+    
+            let new_uv = self.graph[m1].uv.clone();
+            self.graph[m2].uv.extend(new_uv);
+        }
+    }
 
     fn make_portal1_scene(&mut self) {
         let blue_x = (self.sizex as f32 * 0.2) as usize;
@@ -707,7 +900,18 @@ impl Mesh {
         if scene == "portal2" {
             space_graph.make_portal2_scene();
         }
-
+        if scene == "move1" {
+            space_graph.make_move_1_scene();
+        }
+        if scene == "move2" {
+            space_graph.make_move_2_scene();
+        }
+        if scene == "move3" {
+            space_graph.make_move_3_scene();
+        }
+        if scene == "move4" {
+            space_graph.make_move_4_scene();
+        }
         macro_rules! trying {
             ($($body:stmt);* $(;)?) => {
                 (|| -> Option<()> {
