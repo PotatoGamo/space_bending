@@ -357,6 +357,14 @@ void main() {
             texColor = drawFlatScene(texUV);
         } else if (sceneType == 4) {
             texColor = drawPortal1Scene(texUV, 2. / size);
+        } else if (sceneType == 5) {
+            texColor = drawPortal1Scene(texUV, 0.);
+        } else if (sceneType == 6) {
+            texColor = drawPortal1Scene(texUV, 1. / size);
+        } else if (sceneType == 7) {
+            texColor = drawPortal1Scene(texUV, 2. / size);
+        } else if (sceneType == 8) {
+            texColor = drawPortal1Scene(texUV, 3. / size);
         }
     }
     
